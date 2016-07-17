@@ -1,0 +1,33 @@
+$primaryText: #363F45;
+$heading: #303F9F;
+$background: #B6B6B6;
+$accent: #C5CAE9;
+$hover: #FFEB3B;
+
+body {
+  color: $primaryText;
+  background-color: $background;
+}
+
+.heading, .footer, .playgroundTitle {
+  color: $heading;
+  text-align: center;
+}
+
+.heading a, .footer a {
+  text-decoration: none;
+}
+
+a:link {
+  color: $accent;
+}
+
+a:hover {
+  color: $hover;
+  line-decoration: none;
+}
+
+.well {
+  height:255px;  
+}
+

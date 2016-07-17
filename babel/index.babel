@@ -1,0 +1,169 @@
+var Previewer = (props) => {
+  return (
+      <div className="previewer">
+        <PreviewerHead />
+        <PreviewerMD />
+        <PreviewerFoot />
+      </div>
+    );
+  };
+
+var PreviewerHead = (props)=>{
+    return (
+      <div className="container-fluid">
+       
+       <div className="heading">
+        <h1>Free Code Camp</h1>
+        <h2>Markdown Previewer</h2>
+         <p>Markdowns are a simple way of adding format to your plain text, like headings, subheadings, lists and images. We use them a lot in the <a href='https://gitter.im/FreeCodeCamp/FreeCodeCamp' target='_blank'>FCC Gitter chatrooms</a>. </p> 
+       </div>
+       
+       <div className="row">
+         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+           <h2>What to Type:</h2>
+         </div>
+         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+           <h2>How It Will Look:</h2>
+         </div>
+       </div>
+       
+       <div className="row">
+         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 examples1 pre-scrollable">
+           #Biggest Heading<br/>
+           ##Sub-Heading<br/>
+           ######Smallest sub-heading<br/>
+           <br/>
+           <br/>
+           **This is bold text**
+           <br/> 
+           __This is bold text__
+           <br/>
+          *This is italic text*
+          <br/>
+          _This is italic text_
+          <br/>
+          ~~Deleted text~~
+          <br/>
+          Superscript: 19^th^
+          <br/>
+          Subscript: H~2~O
+          <br/>
+          ++Inserted text++
+          <br/>
+          ==Marked text==
+           <br/>
+           <br/>
+          Ordered List:
+           <br/>
+          I like:
+          <br/>
+          1. The Graham Norton Show
+          <br/> 
+          2. Iced espresso
+          <br/> 
+          3. Reddit's AskReddit subreddit
+         <br/>
+         <br/>
+          ### Images
+          <br/>
+         ![MountieCat](https://octodex.github.com/images/mountietocat.png)
+          <br/>
+          ![FemaleCoderCat](https://octodex.github.com/images/femalecodertocat.png) 
+          <br/>
+           
+         </div>
+         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 examples2 pre-scrollable">
+           <h1>Biggest Heading</h1>
+           <h2>Sub-Heading</h2>
+           <h6>Smallest sub-heading</h6>
+           <p><strong>This is bold text</strong></p>
+           <p><strong>This is bold text</strong></p>
+           <p><em>This is italic text</em></p>
+           <p><em>This is italic text</em></p>
+           <p><del>Deleted text</del></p>
+           <p>Superscript: 19<sup>th</sup></p>
+           <p>Subscript: H<sub>2</sub>O</p>
+           <p><ins>Inserted text</ins></p>
+           <p><mark>Marked text</mark></p>
+           <p>Ordered List:</p>
+           <p>I like:</p>
+          <ol>
+            <li>The Graham Norton Show</li>
+            <li>Iced espresso</li>
+            <li>Reddit's AskReddit subreddit</li>
+          </ol>
+          <h3>Images</h3>
+<p><img src={"https://octodex.github.com/images/mountietocat.png"} alt="Mountie Cat" title="Mountie Cat" className="img-responsive" width="200"/>
+<img src={"https://octodex.github.com/images/femalecodertocat.png"} alt="Female Coder Cat" title="Female Coder Cat" className="img-responsive" width='200'/></p>
+         </div>
+       </div>
+       
+    </div>
+    );
+};
+
+var PreviewerMD = React.createClass({
+  rawMarkup: function(value){
+    var md = new Remarkable();
+    var rawMarkup = md.render(value);
+    return({__html: rawMarkup});
+  },
+  getInitialState: function(){
+    return {
+      playground: ''
+    }
+  },
+  onUpdateText: function(){
+    this.setState({
+      value: this.refs.rawText.value
+    })
+  },
+  render: function() {
+    return (
+      <div className="container-fluid">
+        <div className="playgroundTitle">
+          <h2>Try Markdown Yourself:</h2>
+        </div>
+        <div className="playground">
+          <div className="row heading">
+    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <p>Type in the box on the left and watch the markdown text appear on the right.</p>
+    </div>
+  </div>
+  <div className="row text">
+  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 pre-scrollable">
+    <div className="form-group">
+       <textarea className = "form-control" rows = "12" id="input" type="text" placeholder="Playground-- type here!"  ref="rawText" defaultValue={this.state.playground} onChange={this.onUpdateText}></textarea> 
+    </div>
+  </div>
+  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 pre-scrollable">
+    <div className="well text" rows = "12">
+      <div id="preview" dangerouslySetInnerHTML={this.rawMarkup(this.state.value)} >
+      </div> 
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    );
+  }
+});                               
+
+var PreviewerFoot = (props) => {
+    return (
+      <div className="container-fluid">
+      <div className="footer">
+        <h3>Made by < a href="https://www.freecodecamp.com/cyclokitty"> @Cyclokitty</a></h3>
+        <p>with blood, sweat, tears and powered by vats of coffee and several coconut popsicles</p>
+        <p>... and React, Sass, and Bootstrap.</p>
+      </div> 
+    </div>
+    );
+};
+
+//this needs to be at the bottom of the script and is only called after the composite components have been defined. 
+
+ReactDOM.render(
+  <Previewer />,
+  document.getElementById("content")
+);

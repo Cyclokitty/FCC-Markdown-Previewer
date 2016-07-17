@@ -1,0 +1,26 @@
+body {
+  color: #363F45;
+  background-color: #B6B6B6;
+}
+
+.heading, .footer, .playgroundTitle {
+  color: #303F9F;
+  text-align: center;
+}
+
+.heading a, .footer a {
+  text-decoration: none;
+}
+
+a:link {
+  color: #C5CAE9;
+}
+
+a:hover {
+  color: #FFEB3B;
+  line-decoration: none;
+}
+
+.well {
+  height: 255px;
+}
